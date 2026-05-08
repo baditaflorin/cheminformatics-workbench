@@ -1,0 +1,66 @@
+[
+  {
+    "key": "molecularWeight",
+    "label": "Molecular weight",
+    "units": "Da",
+    "description": "Estimated exact molecular mass from parsed atoms.",
+    "minimum": 0,
+    "maximum": 900
+  },
+  {
+    "key": "logP",
+    "label": "cLogP estimate",
+    "units": "",
+    "description": "Fragment-style hydrophobicity estimate for rapid triage.",
+    "minimum": -4,
+    "maximum": 8
+  },
+  {
+    "key": "hBondDonors",
+    "label": "H-bond donors",
+    "units": "count",
+    "description": "Approximate donor count from N/O/S atoms.",
+    "minimum": 0,
+    "maximum": 12
+  },
+  {
+    "key": "hBondAcceptors",
+    "label": "H-bond acceptors",
+    "units": "count",
+    "description": "Approximate acceptor count from N/O/S/F atoms.",
+    "minimum": 0,
+    "maximum": 18
+  },
+  {
+    "key": "tpsa",
+    "label": "TPSA estimate",
+    "units": "A^2",
+    "description": "Fast polar surface proxy used by the bundled model.",
+    "minimum": 0,
+    "maximum": 220
+  },
+  {
+    "key": "rotatableBonds",
+    "label": "Rotatable bonds",
+    "units": "count",
+    "description": "Single-bond proxy for ligand flexibility.",
+    "minimum": 0,
+    "maximum": 20
+  },
+  {
+    "key": "ringCount",
+    "label": "Ring count",
+    "units": "count",
+    "description": "Ring closure digit count in SMILES.",
+    "minimum": 0,
+    "maximum": 8
+  },
+  {
+    "key": "aromaticAtoms",
+    "label": "Aromatic atoms",
+    "units": "count",
+    "description": "Lowercase aromatic atom tokens in SMILES.",
+    "minimum": 0,
+    "maximum": 40
+  }
+]

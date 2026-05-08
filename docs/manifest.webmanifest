@@ -1,0 +1,16 @@
+{
+  "name": "Cheminformatics Workbench",
+  "short_name": "ChemWorkbench",
+  "start_url": "/cheminformatics-workbench/",
+  "scope": "/cheminformatics-workbench/",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#059669",
+  "icons": [
+    {
+      "src": "/cheminformatics-workbench/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

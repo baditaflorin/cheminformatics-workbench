@@ -1,0 +1,71 @@
+[
+  {
+    "id": "egfr-hinge-v1",
+    "name": "EGFR kinase hinge",
+    "target": "EGFR",
+    "description": "Academic-scale example pocket for kinase-like ligands.",
+    "gridCenter": [
+      24.2,
+      3.1,
+      58.9
+    ],
+    "gridSize": [
+      22,
+      20,
+      18
+    ],
+    "weights": {
+      "hBondAcceptors": -0.22,
+      "logP": -0.52,
+      "molecularWeight": -0.004,
+      "rotatableBonds": 0.18,
+      "tpsa": 0.018
+    }
+  },
+  {
+    "id": "cox2-channel-v1",
+    "name": "COX-2 channel",
+    "target": "PTGS2",
+    "description": "Hydrophobic channel proxy for anti-inflammatory examples.",
+    "gridCenter": [
+      31.4,
+      -12.7,
+      22.1
+    ],
+    "gridSize": [
+      18,
+      24,
+      18
+    ],
+    "weights": {
+      "hBondDonors": -0.16,
+      "logP": -0.38,
+      "molecularWeight": -0.003,
+      "rotatableBonds": 0.16,
+      "tpsa": 0.012
+    }
+  },
+  {
+    "id": "adora2a-orthosteric-v1",
+    "name": "A2A orthosteric site",
+    "target": "ADORA2A",
+    "description": "GPCR-like orthosteric pocket proxy for xanthine ligands.",
+    "gridCenter": [
+      -4.1,
+      18.3,
+      42.6
+    ],
+    "gridSize": [
+      20,
+      20,
+      22
+    ],
+    "weights": {
+      "hBondAcceptors": -0.3,
+      "logP": -0.25,
+      "molecularWeight": -0.002,
+      "ringCount": -0.2,
+      "rotatableBonds": 0.22
+    }
+  }
+]

@@ -1,0 +1,138 @@
+[
+  {
+    "compoundId": "CHEMBL25",
+    "name": "Aspirin",
+    "smiles": "CC(=O)Oc1ccccc1C(=O)O",
+    "target": "PTGS2",
+    "activity": 4.6,
+    "units": "IC50",
+    "pchembl": 5.34,
+    "assayType": "B",
+    "tags": [
+      "anti-inflammatory",
+      "COX"
+    ],
+    "properties": {
+      "pchembl": 5.34
+    }
+  },
+  {
+    "compoundId": "CHEMBL113",
+    "name": "Caffeine",
+    "smiles": "Cn1cnc2n(C)c(=O)n(C)c(=O)c12",
+    "target": "ADORA2A",
+    "activity": 12,
+    "units": "Ki",
+    "pchembl": 4.92,
+    "assayType": "B",
+    "tags": [
+      "adenosine",
+      "CNS"
+    ],
+    "properties": {
+      "pchembl": 4.92
+    }
+  },
+  {
+    "compoundId": "CHEMBL941",
+    "name": "Imatinib",
+    "smiles": "CC1=C(C=C(C=C1)NC(=O)C2=CC=CN=C2)NC3=NC=CC(=N3)C4=CN=CC=C4",
+    "target": "ABL1",
+    "activity": 0.038,
+    "units": "IC50",
+    "pchembl": 10.42,
+    "assayType": "B",
+    "tags": [
+      "kinase",
+      "oncology"
+    ],
+    "properties": {
+      "pchembl": 10.42
+    }
+  },
+  {
+    "compoundId": "CHEMBL553",
+    "name": "Erlotinib",
+    "smiles": "COCCOC1=C(C=C2C(=C1)N=CN=C2NC3=CC=CC(=C3)C#C)OCCOC",
+    "target": "EGFR",
+    "activity": 0.002,
+    "units": "IC50",
+    "pchembl": 11.7,
+    "assayType": "B",
+    "tags": [
+      "kinase",
+      "EGFR"
+    ],
+    "properties": {
+      "pchembl": 11.7
+    }
+  },
+  {
+    "compoundId": "CHEMBL112",
+    "name": "Paracetamol",
+    "smiles": "CC(=O)NC1=CC=C(C=C1)O",
+    "target": "PTGS2",
+    "activity": 55,
+    "units": "IC50",
+    "pchembl": 4.26,
+    "assayType": "B",
+    "tags": [
+      "analgesic",
+      "phenol"
+    ],
+    "properties": {
+      "pchembl": 4.26
+    }
+  },
+  {
+    "compoundId": "CHEMBL1464",
+    "name": "Warfarin",
+    "smiles": "CC(=O)CC(C1=CC=CC=C1)C2=C(O)OC3=CC=CC=C3C2=O",
+    "target": "VKORC1",
+    "activity": 1.1,
+    "units": "IC50",
+    "pchembl": 5.96,
+    "assayType": "B",
+    "tags": [
+      "anticoagulant",
+      "coumarin"
+    ],
+    "properties": {
+      "pchembl": 5.96
+    }
+  },
+  {
+    "compoundId": "CHEMBL54",
+    "name": "Nicotine",
+    "smiles": "CN1CCCC1C2=CN=CC=C2",
+    "target": "CHRNA4",
+    "activity": 0.24,
+    "units": "Ki",
+    "pchembl": 6.62,
+    "assayType": "B",
+    "tags": [
+      "nicotinic",
+      "alkaloid"
+    ],
+    "properties": {
+      "pchembl": 6.62
+    }
+  },
+  {
+    "compoundId": "CHEMBL1201585",
+    "name": "Gefitinib",
+    "smiles": "COC1=C(C=C2C(=C1)N=CN=C2NC3=CC(=C(C=C3)F)Cl)OCCCN4CCOCC4",
+    "target": "EGFR",
+    "activity": 0.033,
+    "units": "IC50",
+    "pchembl": 10.48,
+    "assayType": "B",
+    "tags": [
+      "kinase",
+      "EGFR"
+    ],
+    "properties": {
+      "pchembl": 10.48
+    }
+  }
+]
