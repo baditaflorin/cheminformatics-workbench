@@ -1,0 +1,11 @@
+node_modules
+docs/assets
+docs/data
+public/data
+docs/index.html
+docs/404.html
+docs/sw.js
+docs/version.json
+test-results
+playwright-report
+coverage
