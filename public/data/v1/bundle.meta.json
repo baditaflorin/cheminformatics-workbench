@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-08T09:17:33Z",
-  "sourceCommit": "89fda9f",
+  "generatedAt": "2026-05-08T09:20:27Z",
+  "sourceCommit": "9786a99",
   "inputChecksums": {
     "chembl-subset": "sha256:3cc845bb5342cbc496cfcb79d1279395411c32efdc617f7f0ec1a545ef57253d",
     "embedded-curated-subset": "sha256:static-v1"
