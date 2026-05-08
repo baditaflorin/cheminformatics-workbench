@@ -1,0 +1,43 @@
+{
+  "id": "deepchem-egfr-logreg-static",
+  "version": "0.1.0",
+  "target": "EGFR",
+  "runtime": "json-logistic; onnx-runtime-web adapter reserved",
+  "threshold": 0.62,
+  "intercept": -0.35,
+  "coefficients": {
+    "aromaticAtoms": 0.26,
+    "hBondAcceptors": 0.22,
+    "hBondDonors": -0.28,
+    "logP": 0.74,
+    "molecularWeight": 0.62,
+    "ringCount": 0.31,
+    "rotatableBonds": 0.16,
+    "tpsa": -0.48
+  },
+  "featureMeans": {
+    "aromaticAtoms": 10,
+    "hBondAcceptors": 6,
+    "hBondDonors": 2,
+    "logP": 2.8,
+    "molecularWeight": 340,
+    "ringCount": 3,
+    "rotatableBonds": 5,
+    "tpsa": 78
+  },
+  "featureScales": {
+    "aromaticAtoms": 8,
+    "hBondAcceptors": 4,
+    "hBondDonors": 2,
+    "logP": 2.2,
+    "molecularWeight": 160,
+    "ringCount": 2,
+    "rotatableBonds": 4,
+    "tpsa": 42
+  },
+  "metrics": {
+    "accuracy": 0.72,
+    "n": 8,
+    "rocAuc": 0.78
+  }
+}

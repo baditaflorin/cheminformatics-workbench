@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "v1",
+  "generatedAt": "2026-05-08T09:09:10Z",
+  "chemblSubset": [
+    {
+      "compoundId": "CHEMBL25",
+      "name": "Aspirin",
+      "smiles": "CC(=O)Oc1ccccc1C(=O)O",
+      "target": "PTGS2",
+      "activity": 4.6,
+      "units": "IC50",
+      "pchembl": 5.34,
+      "assayType": "B",
+      "tags": [
+        "anti-inflammatory",
+        "COX"
+      ],
+      "properties": {
+        "pchembl": 5.34
+      }
+    },
+    {
+      "compoundId": "CHEMBL113",
+      "name": "Caffeine",
+      "smiles": "Cn1cnc2n(C)c(=O)n(C)c(=O)c12",
+      "target": "ADORA2A",
+      "activity": 12,
+      "units": "Ki",
+      "pchembl": 4.92,
+      "assayType": "B",
+      "tags": [
+        "adenosine",
+        "CNS"
+      ],
+      "properties": {
+        "pchembl": 4.92
+      }
+    },
+    {
+      "compoundId": "CHEMBL941",
+      "name": "Imatinib",
+      "smiles": "CC1=C(C=C(C=C1)NC(=O)C2=CC=CN=C2)NC3=NC=CC(=N3)C4=CN=CC=C4",
+      "target": "ABL1",
+      "activity": 0.038,
+      "units": "IC50",
+      "pchembl": 10.42,
+      "assayType": "B",
+      "tags": [
+        "kinase",
+        "oncology"
+      ],
+      "properties": {
+        "pchembl": 10.42
+      }
+    },
+    {
+      "compoundId": "CHEMBL553",
+      "name": "Erlotinib",
+      "smiles": "COCCOC1=C(C=C2C(=C1)N=CN=C2NC3=CC=CC(=C3)C#C)OCCOC",
+      "target": "EGFR",
+      "activity": 0.002,
+      "units": "IC50",
+      "pchembl": 11.7,
+      "assayType": "B",
+      "tags": [
+        "kinase",
+        "EGFR"
+      ],
+      "properties": {
+        "pchembl": 11.7
+      }
+    },
+    {
+      "compoundId": "CHEMBL112",
+      "name": "Paracetamol",
+      "smiles": "CC(=O)NC1=CC=C(C=C1)O",
+      "target": "PTGS2",
+      "activity": 55,
+      "units": "IC50",
+      "pchembl": 4.26,
+      "assayType": "B",
+      "tags": [
+        "analgesic",
+        "phenol"
+      ],
+      "properties": {
+        "pchembl": 4.26
+      }
+    },
+    {
+      "compoundId": "CHEMBL1464",
+      "name": "Warfarin",
+      "smiles": "CC(=O)CC(C1=CC=CC=C1)C2=C(O)OC3=CC=CC=C3C2=O",
+      "target": "VKORC1",
+      "activity": 1.1,
+      "units": "IC50",
+      "pchembl": 5.96,
+      "assayType": "B",
+      "tags": [
+        "anticoagulant",
+        "coumarin"
+      ],
+      "properties": {
+        "pchembl": 5.96
+      }
+    },
+    {
+      "compoundId": "CHEMBL54",
+      "name": "Nicotine",
+      "smiles": "CN1CCCC1C2=CN=CC=C2",
+      "target": "CHRNA4",
+      "activity": 0.24,
+      "units": "Ki",
+      "pchembl": 6.62,
+      "assayType": "B",
+      "tags": [
+        "nicotinic",
+        "alkaloid"
+      ],
+      "properties": {
+        "pchembl": 6.62
+      }
+    },
+    {
+      "compoundId": "CHEMBL1201585",
+      "name": "Gefitinib",
+      "smiles": "COC1=C(C=C2C(=C1)N=CN=C2NC3=CC(=C(C=C3)F)Cl)OCCCN4CCOCC4",
+      "target": "EGFR",
+      "activity": 0.033,
+      "units": "IC50",
+      "pchembl": 10.48,
+      "assayType": "B",
+      "tags": [
+        "kinase",
+        "EGFR"
+      ],
+      "properties": {
+        "pchembl": 10.48
+      }
+    }
+  ],
+  "descriptors": [
+    {
+      "key": "molecularWeight",
+      "label": "Molecular weight",
+      "units": "Da",
+      "description": "Estimated exact molecular mass from parsed atoms.",
+      "minimum": 0,
+      "maximum": 900
+    },
+    {
+      "key": "logP",
+      "label": "cLogP estimate",
+      "units": "",
+      "description": "Fragment-style hydrophobicity estimate for rapid triage.",
+      "minimum": -4,
+      "maximum": 8
+    },
+    {
+      "key": "hBondDonors",
+      "label": "H-bond donors",
+      "units": "count",
+      "description": "Approximate donor count from N/O/S atoms.",
+      "minimum": 0,
+      "maximum": 12
+    },
+    {
+      "key": "hBondAcceptors",
+      "label": "H-bond acceptors",
+      "units": "count",
+      "description": "Approximate acceptor count from N/O/S/F atoms.",
+      "minimum": 0,
+      "maximum": 18
+    },
+    {
+      "key": "tpsa",
+      "label": "TPSA estimate",
+      "units": "A^2",
+      "description": "Fast polar surface proxy used by the bundled model.",
+      "minimum": 0,
+      "maximum": 220
+    },
+    {
+      "key": "rotatableBonds",
+      "label": "Rotatable bonds",
+      "units": "count",
+      "description": "Single-bond proxy for ligand flexibility.",
+      "minimum": 0,
+      "maximum": 20
+    },
+    {
+      "key": "ringCount",
+      "label": "Ring count",
+      "units": "count",
+      "description": "Ring closure digit count in SMILES.",
+      "minimum": 0,
+      "maximum": 8
+    },
+    {
+      "key": "aromaticAtoms",
+      "label": "Aromatic atoms",
+      "units": "count",
+      "description": "Lowercase aromatic atom tokens in SMILES.",
+      "minimum": 0,
+      "maximum": 40
+    }
+  ],
+  "model": {
+    "id": "deepchem-egfr-logreg-static",
+    "version": "0.1.0",
+    "target": "EGFR",
+    "runtime": "json-logistic; onnx-runtime-web adapter reserved",
+    "threshold": 0.62,
+    "intercept": -0.35,
+    "coefficients": {
+      "aromaticAtoms": 0.26,
+      "hBondAcceptors": 0.22,
+      "hBondDonors": -0.28,
+      "logP": 0.74,
+      "molecularWeight": 0.62,
+      "ringCount": 0.31,
+      "rotatableBonds": 0.16,
+      "tpsa": -0.48
+    },
+    "featureMeans": {
+      "aromaticAtoms": 10,
+      "hBondAcceptors": 6,
+      "hBondDonors": 2,
+      "logP": 2.8,
+      "molecularWeight": 340,
+      "ringCount": 3,
+      "rotatableBonds": 5,
+      "tpsa": 78
+    },
+    "featureScales": {
+      "aromaticAtoms": 8,
+      "hBondAcceptors": 4,
+      "hBondDonors": 2,
+      "logP": 2.2,
+      "molecularWeight": 160,
+      "ringCount": 2,
+      "rotatableBonds": 4,
+      "tpsa": 42
+    },
+    "metrics": {
+      "accuracy": 0.72,
+      "n": 8,
+      "rocAuc": 0.78
+    }
+  },
+  "receptors": [
+    {
+      "id": "egfr-hinge-v1",
+      "name": "EGFR kinase hinge",
+      "target": "EGFR",
+      "description": "Academic-scale example pocket for kinase-like ligands.",
+      "gridCenter": [
+        24.2,
+        3.1,
+        58.9
+      ],
+      "gridSize": [
+        22,
+        20,
+        18
+      ],
+      "weights": {
+        "hBondAcceptors": -0.22,
+        "logP": -0.52,
+        "molecularWeight": -0.004,
+        "rotatableBonds": 0.18,
+        "tpsa": 0.018
+      }
+    },
+    {
+      "id": "cox2-channel-v1",
+      "name": "COX-2 channel",
+      "target": "PTGS2",
+      "description": "Hydrophobic channel proxy for anti-inflammatory examples.",
+      "gridCenter": [
+        31.4,
+        -12.7,
+        22.1
+      ],
+      "gridSize": [
+        18,
+        24,
+        18
+      ],
+      "weights": {
+        "hBondDonors": -0.16,
+        "logP": -0.38,
+        "molecularWeight": -0.003,
+        "rotatableBonds": 0.16,
+        "tpsa": 0.012
+      }
+    },
+    {
+      "id": "adora2a-orthosteric-v1",
+      "name": "A2A orthosteric site",
+      "target": "ADORA2A",
+      "description": "GPCR-like orthosteric pocket proxy for xanthine ligands.",
+      "gridCenter": [
+        -4.1,
+        18.3,
+        42.6
+      ],
+      "gridSize": [
+        20,
+        20,
+        22
+      ],
+      "weights": {
+        "hBondAcceptors": -0.3,
+        "logP": -0.25,
+        "molecularWeight": -0.002,
+        "ringCount": -0.2,
+        "rotatableBonds": 0.22
+      }
+    }
+  ],
+  "samples": [
+    {
+      "id": "aspirin",
+      "name": "Aspirin",
+      "smiles": "CC(=O)Oc1ccccc1C(=O)O",
+      "target": "PTGS2",
+      "molBlock": "\n  Mrv2311 05082608262D          \n\n 13 13  0  0  0  0            999 V2000\n   -3.7321    0.5357    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.0177    0.1232    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.3032    0.5357    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.0177   -0.7018    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5887    0.1232    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8742    0.5357    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1598    0.1232    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1598   -0.7018    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8742   -1.1143    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5887   -0.7018    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5547   -1.1143    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2692   -0.7018    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5547   -1.9393    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  2  4  2  0\n  3  5  1  0\n  5  6  2  0\n  6  7  1  0\n  7  8  2  0\n  8  9  1  0\n  9 10  2  0\n 10  5  1  0\n  8 11  1  0\n 11 12  2  0\n 11 13  1  0\nM  END\n"
+    },
+    {
+      "id": "caffeine",
+      "name": "Caffeine",
+      "smiles": "Cn1cnc2n(C)c(=O)n(C)c(=O)c12",
+      "target": "ADORA2A",
+      "molBlock": "\n  Mrv2311 05082608262D          \n\n 14 15  0  0  0  0            999 V2000\n   -2.4750    0.4125    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6500    0.4125    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2375    1.1270    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4125    1.1270    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.4125    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4125   -0.3020    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2375   -0.3020    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8250    0.4125    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2375   -0.3020    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8250   -1.0165    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000   -1.0165    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8250   -1.0165    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0625   -0.3020    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000   -1.8415    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  1  0\n  6  7  2  0\n  7  2  1  0\n  5  8  2  0\n  8  9  1  0\n  9 10  1  0\n 10 11  2  0\n 11  6  1  0\n 11 12  1  0\n  9 13  2  0\n 11 14  1  0\nM  END\n"
+    }
+  ]
+}
