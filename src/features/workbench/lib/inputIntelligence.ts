@@ -522,6 +522,16 @@ function extractChemblMolecule(
     typeof record.molecule_chembl_id === "string"
       ? record.molecule_chembl_id
       : undefined;
+  const properties = record.molecule_properties as Record<
+    string,
+    unknown
+  > | null;
+  const formula =
+    typeof properties?.full_molformula === "string"
+      ? properties.full_molformula
+      : undefined;
+  const molecularWeight =
+    typeof properties?.full_mwt === "string" ? properties.full_mwt : undefined;
   return makeCandidate({
     name,
     smiles,
@@ -533,6 +543,8 @@ function extractChemblMolecule(
     ],
     metadata: {
       ...(chemblId ? { chemblId } : {}),
+      ...(formula ? { formula } : {}),
+      ...(molecularWeight ? { molecularWeight } : {}),
     },
   });
 }

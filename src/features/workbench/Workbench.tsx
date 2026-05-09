@@ -55,8 +55,26 @@ export function Workbench() {
     if (!molecule?.smiles || !analysis?.canPredict) {
       return null;
     }
-    return calculateDescriptors(molecule.smiles);
-  }, [analysis?.canPredict, molecule]);
+    const baseDescriptors = calculateDescriptors(molecule.smiles);
+    const activeCandidate =
+      analysis.candidates.find((candidate) => candidate.id === molecule.id) ??
+      analysis.candidates[0];
+    const sourceFormula = activeCandidate?.metadata.formula;
+    const sourceMolecularWeight = activeCandidate?.metadata.molecularWeight;
+    return {
+      ...baseDescriptors,
+      formula:
+        typeof sourceFormula === "string"
+          ? sourceFormula
+          : baseDescriptors.formula,
+      molecularWeight:
+        typeof sourceMolecularWeight === "string"
+          ? Number(sourceMolecularWeight)
+          : typeof sourceMolecularWeight === "number"
+            ? sourceMolecularWeight
+            : baseDescriptors.molecularWeight,
+    };
+  }, [analysis, molecule]);
 
   const prediction = useMemo(() => {
     if (!bundle || !descriptors || !analysis?.canPredict) {
