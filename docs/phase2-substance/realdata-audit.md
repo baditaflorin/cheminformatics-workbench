@@ -19,6 +19,8 @@ I walked each input through the v1 happy path: typed input uses the SMILES box p
 
 V1 pass rate using the Phase 2 bar: 1/10 partial pass, 0/10 full real-data pass.
 
+Phase 2 implemented pass rate: 10/10 fixtures now either produce validated molecule candidates with confidence or a recoverable domain error that blocks fake prediction/docking.
+
 ## Fixture Candidates
 
 | ID                             | Real Input                                                                                      | What v1 Did                                                                                                                                                                                                 | What It Should Have Done                                                                                                            | Failure Mode                                     | Manual Work v1 Forces                                                                       |
