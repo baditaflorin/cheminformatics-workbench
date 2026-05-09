@@ -12,7 +12,12 @@ import { calculateDescriptors } from "./lib/chemistry";
 import { fetchBundle, fetchMeta } from "./lib/data";
 import { analyzeMoleculeInput } from "./lib/inputIntelligence";
 import { predictBioactivity, scoreDocking } from "./lib/prediction";
-import { loadLastMolecule, saveLastMolecule } from "./lib/storage";
+import {
+  loadDefaultReceptor,
+  loadLastMolecule,
+  saveDefaultReceptor,
+  saveLastMolecule,
+} from "./lib/storage";
 import type {
   DockingResult,
   InputAnalysis,
@@ -47,6 +52,11 @@ export function Workbench() {
       if (saved) {
         setMolecule(saved);
         setSmiles(saved.smiles);
+      }
+    });
+    void loadDefaultReceptor().then((saved) => {
+      if (saved) {
+        setSelectedReceptor(saved);
       }
     });
   }, []);
@@ -147,6 +157,11 @@ export function Workbench() {
     }
   }
 
+  function selectReceptor(receptorId: string) {
+    setSelectedReceptor(receptorId);
+    void saveDefaultReceptor(receptorId);
+  }
+
   const dataStatus = useQuery({
     queryKey: ["duckdb-status", bundle?.schemaVersion],
     queryFn: async () => {
@@ -219,7 +234,7 @@ export function Workbench() {
               selectedReceptor={effectiveReceptor}
               result={docking}
               disabled={!descriptors || !bundle || !analysis?.canPredict}
-              onSelect={setSelectedReceptor}
+              onSelect={selectReceptor}
               onRun={runDocking}
             />
             <DebugState analysis={analysis} />
