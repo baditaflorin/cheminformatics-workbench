@@ -21,6 +21,74 @@ export type MoleculeInput = {
   target?: string;
 };
 
+export type SourceFormat =
+  | "empty"
+  | "smiles"
+  | "inchi"
+  | "sdf"
+  | "delimited"
+  | "chembl-json"
+  | "pubchem-json"
+  | "partial-json"
+  | "unsupported";
+
+export type DomainIssue = {
+  code: string;
+  severity: "info" | "warning" | "error";
+  recoverable: boolean;
+  title: string;
+  what: string;
+  why: string;
+  nextStep: string;
+};
+
+export type ConfidenceLabel = "high" | "medium" | "low";
+
+export type MoleculeCandidate = MoleculeInput & {
+  sourceFormat: SourceFormat;
+  sourceId: string;
+  confidence: number;
+  confidenceLabel: ConfidenceLabel;
+  reasons: string[];
+  warnings: DomainIssue[];
+  metadata: Record<string, string | number | boolean>;
+  originalSmiles?: string;
+  components?: string[];
+};
+
+export type InputAnalysisState =
+  | "idle"
+  | "loaded-empty"
+  | "classifying"
+  | "loaded-valid"
+  | "loaded-many"
+  | "loaded-warning"
+  | "error-recoverable"
+  | "error-fatal";
+
+export type InputAnalysis = {
+  state: InputAnalysisState;
+  sourceFormat: SourceFormat;
+  normalizedText: string;
+  candidates: MoleculeCandidate[];
+  activeCandidateId?: string;
+  issues: DomainIssue[];
+  canPredict: boolean;
+  confidence: number;
+  provenance: {
+    sourceId: string;
+    sourceName: string;
+    extractionMethod: string;
+    schemaVersion: string;
+    appVersion: string;
+  };
+  performance: {
+    inputBytes: number;
+    elapsedMs: number;
+    largeInput: boolean;
+  };
+};
+
 export type DescriptorSpec = {
   key: keyof DescriptorVector;
   label: string;
