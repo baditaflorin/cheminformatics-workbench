@@ -1,0 +1,9 @@
+{
+  "expectedKind": "candidates",
+  "minCandidates": 2,
+  "firstSmiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+  "sourceFormat": "sdf",
+  "minConfidence": 0.9,
+  "requiredIssueCode": "multiple-molecules-detected",
+  "allowPrediction": true
+}

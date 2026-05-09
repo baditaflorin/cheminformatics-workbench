@@ -1,0 +1,9 @@
+{
+  "expectedKind": "candidates",
+  "minCandidates": 1,
+  "firstSmiles": "CC(=O)Oc1ccccc1C(=O)O",
+  "firstName": "ASPIRIN",
+  "sourceFormat": "delimited",
+  "minConfidence": 0.75,
+  "allowPrediction": true
+}

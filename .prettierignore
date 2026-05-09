@@ -7,5 +7,6 @@ docs/404.html
 docs/sw.js
 docs/version.json
 test-results
+test/fixtures
 playwright-report
 coverage

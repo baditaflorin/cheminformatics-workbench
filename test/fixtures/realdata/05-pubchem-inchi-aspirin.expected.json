@@ -1,0 +1,6 @@
+{
+  "expectedKind": "error",
+  "sourceFormat": "inchi",
+  "requiredIssueCode": "inchi-unsupported",
+  "allowPrediction": false
+}

@@ -1,0 +1,9 @@
+{
+  "expectedKind": "candidates",
+  "minCandidates": 1,
+  "firstSmiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+  "sourceFormat": "smiles",
+  "minConfidence": 0.7,
+  "requiredIssueCode": "input-normalized",
+  "allowPrediction": true
+}

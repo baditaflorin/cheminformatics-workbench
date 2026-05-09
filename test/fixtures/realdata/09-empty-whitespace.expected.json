@@ -1,0 +1,6 @@
+{
+  "expectedKind": "error",
+  "sourceFormat": "empty",
+  "requiredIssueCode": "empty-input",
+  "allowPrediction": false
+}

@@ -1,0 +1,7 @@
+{
+  "expectedKind": "error",
+  "sourceFormat": "partial-json",
+  "requiredIssueCode": "partial-json",
+  "allowPrediction": false,
+  "maxElapsedMs": 300
+}
