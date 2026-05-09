@@ -2,16 +2,18 @@ import { Download, FileJson } from "lucide-react";
 import type {
   DescriptorVector,
   DockingResult,
+  InputAnalysis,
   MoleculeInput,
   Prediction,
 } from "../types/domain";
-import { downloadText, exportCsv } from "../lib/export";
+import { downloadText, exportCsv, exportJson } from "../lib/export";
 
 type Props = {
   molecule: MoleculeInput | null;
   descriptors: DescriptorVector | null;
   prediction: Prediction | null;
   docking: DockingResult | null;
+  analysis: InputAnalysis | null;
 };
 
 export function ExportPanel({
@@ -19,6 +21,7 @@ export function ExportPanel({
   descriptors,
   prediction,
   docking,
+  analysis,
 }: Props) {
   const disabled = !molecule || !descriptors || !prediction;
 
@@ -37,7 +40,7 @@ export function ExportPanel({
             if (molecule && descriptors && prediction) {
               downloadText(
                 "sar-export.csv",
-                exportCsv(molecule, descriptors, prediction, docking),
+                exportCsv(molecule, descriptors, prediction, docking, analysis),
                 "text/csv",
               );
             }
@@ -54,10 +57,12 @@ export function ExportPanel({
             if (molecule && descriptors && prediction) {
               downloadText(
                 "sar-export.json",
-                JSON.stringify(
-                  { molecule, descriptors, prediction, docking },
-                  null,
-                  2,
+                exportJson(
+                  molecule,
+                  descriptors,
+                  prediction,
+                  docking,
+                  analysis,
                 ),
                 "application/json",
               );

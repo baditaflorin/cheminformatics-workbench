@@ -10,10 +10,12 @@ import { MoleculeViewer } from "./components/MoleculeViewer";
 import { ExportPanel } from "./components/ExportPanel";
 import { calculateDescriptors } from "./lib/chemistry";
 import { fetchBundle, fetchMeta } from "./lib/data";
+import { analyzeMoleculeInput } from "./lib/inputIntelligence";
 import { predictBioactivity, scoreDocking } from "./lib/prediction";
 import { loadLastMolecule, saveLastMolecule } from "./lib/storage";
 import type {
   DockingResult,
+  InputAnalysis,
   MoleculeInput as MoleculeInputType,
 } from "./types/domain";
 
@@ -23,6 +25,7 @@ export function Workbench() {
   const [selectedSample, setSelectedSample] = useState("");
   const [selectedReceptor, setSelectedReceptor] = useState("");
   const [docking, setDocking] = useState<DockingResult | null>(null);
+  const [analysis, setAnalysis] = useState<InputAnalysis | null>(null);
 
   const [{ data: bundle, isLoading, error }, { data: meta }] = useQueries({
     queries: [
@@ -49,18 +52,18 @@ export function Workbench() {
   }, []);
 
   const descriptors = useMemo(() => {
-    if (!molecule?.smiles) {
+    if (!molecule?.smiles || !analysis?.canPredict) {
       return null;
     }
     return calculateDescriptors(molecule.smiles);
-  }, [molecule]);
+  }, [analysis?.canPredict, molecule]);
 
   const prediction = useMemo(() => {
-    if (!bundle || !descriptors) {
+    if (!bundle || !descriptors || !analysis?.canPredict) {
       return null;
     }
     return predictBioactivity(descriptors, bundle.model, bundle.chemblSubset);
-  }, [bundle, descriptors]);
+  }, [analysis?.canPredict, bundle, descriptors]);
 
   const updatedAge = useMemo(() => {
     if (!meta?.generatedAt) {
@@ -76,8 +79,46 @@ export function Workbench() {
     void saveLastMolecule(next);
   }
 
+  function analyzeRawInput(rawInput: string, sourceName?: string) {
+    const nextAnalysis = analyzeMoleculeInput(rawInput, {
+      sourceName,
+      appVersion: __APP_VERSION__,
+    });
+    setAnalysis(nextAnalysis);
+    setDocking(null);
+    const active = nextAnalysis.candidates[0] ?? null;
+    setMolecule(active);
+    if (active) {
+      setSmiles(active.originalSmiles ?? active.smiles);
+      void saveLastMolecule(active);
+    }
+  }
+
+  function setSample(next: MoleculeInputType) {
+    const nextAnalysis = analyzeMoleculeInput(next.smiles, {
+      sourceName: `sample:${next.id}`,
+      appVersion: __APP_VERSION__,
+    });
+    const active = nextAnalysis.candidates[0]
+      ? {
+          ...nextAnalysis.candidates[0],
+          id: next.id,
+          name: next.name,
+          molBlock: next.molBlock,
+          target: next.target,
+          source: "sample" as const,
+        }
+      : null;
+    setAnalysis({
+      ...nextAnalysis,
+      candidates: active ? [active] : [],
+      activeCandidateId: active?.id,
+    });
+    setAndPersist(active ?? next);
+  }
+
   function runDocking() {
-    if (!bundle || !descriptors) {
+    if (!bundle || !descriptors || !analysis?.canPredict) {
       return;
     }
     const receptor =
@@ -133,7 +174,8 @@ export function Workbench() {
               smiles={smiles}
               selectedSample={selectedSample}
               onSmilesChange={setSmiles}
-              onMolecule={setAndPersist}
+              onMolecule={setSample}
+              onInput={analyzeRawInput}
               onSampleChange={setSelectedSample}
             />
             <ExportPanel
@@ -141,6 +183,7 @@ export function Workbench() {
               descriptors={descriptors}
               prediction={prediction}
               docking={docking}
+              analysis={analysis}
             />
           </div>
           <div className="space-y-4">
@@ -151,18 +194,85 @@ export function Workbench() {
             />
           </div>
           <div className="space-y-4">
+            <AnalysisIssues analysis={analysis} />
             <PredictionPanel prediction={prediction} />
             <DockingPanel
               receptors={bundle?.receptors ?? []}
               selectedReceptor={effectiveReceptor}
               result={docking}
-              disabled={!descriptors || !bundle}
+              disabled={!descriptors || !bundle || !analysis?.canPredict}
               onSelect={setSelectedReceptor}
               onRun={runDocking}
             />
+            <DebugState analysis={analysis} />
           </div>
         </div>
       </main>
     </div>
+  );
+}
+
+function AnalysisIssues({ analysis }: { analysis: InputAnalysis | null }) {
+  if (!analysis?.issues.length) {
+    return null;
+  }
+  return (
+    <section className="panel">
+      <div className="section-heading">
+        <AlertTriangle className="size-4" aria-hidden="true" />
+        <h2>Input review</h2>
+      </div>
+      <ul className="space-y-2">
+        {analysis.issues.map((issue) => (
+          <li
+            key={issue.code}
+            className="rounded-md border border-slate-200 bg-slate-50 p-3 text-sm"
+          >
+            <p className="font-semibold text-slate-950">{issue.title}</p>
+            <p className="mt-1 text-slate-700">{issue.what}</p>
+            <p className="mt-1 text-slate-600">{issue.why}</p>
+            <p className="mt-1 font-medium text-slate-800">{issue.nextStep}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function DebugState({ analysis }: { analysis: InputAnalysis | null }) {
+  if (
+    !analysis ||
+    new URLSearchParams(window.location.search).get("debug") !== "1"
+  ) {
+    return null;
+  }
+
+  return (
+    <section className="panel">
+      <div className="section-heading">
+        <Database className="size-4" aria-hidden="true" />
+        <h2>Debug</h2>
+      </div>
+      <pre className="max-h-80 overflow-auto rounded-md bg-slate-950 p-3 text-xs text-slate-100">
+        {JSON.stringify(
+          {
+            state: analysis.state,
+            sourceFormat: analysis.sourceFormat,
+            confidence: analysis.confidence,
+            candidates: analysis.candidates.map((candidate) => ({
+              id: candidate.id,
+              name: candidate.name,
+              smiles: candidate.smiles,
+              confidence: candidate.confidence,
+              reasons: candidate.reasons,
+            })),
+            issues: analysis.issues.map((issue) => issue.code),
+            performance: analysis.performance,
+          },
+          null,
+          2,
+        )}
+      </pre>
+    </section>
   );
 }

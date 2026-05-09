@@ -3,7 +3,6 @@ import type {
   SampleMolecule,
   MoleculeInput as MoleculeInputType,
 } from "../types/domain";
-import { createTypedMolecule, parseSdf } from "../lib/chemistry";
 
 type Props = {
   samples: SampleMolecule[];
@@ -11,6 +10,7 @@ type Props = {
   selectedSample: string;
   onSmilesChange: (value: string) => void;
   onMolecule: (molecule: MoleculeInputType) => void;
+  onInput: (rawInput: string, sourceName?: string) => void;
   onSampleChange: (id: string) => void;
 };
 
@@ -20,17 +20,16 @@ export function MoleculeInput({
   selectedSample,
   onSmilesChange,
   onMolecule,
+  onInput,
   onSampleChange,
 }: Props) {
   function runTyped() {
-    if (smiles.trim()) {
-      onMolecule(createTypedMolecule(smiles));
-    }
+    onInput(smiles, "typed input");
   }
 
   async function handleFile(file: File) {
     const text = await file.text();
-    onMolecule(parseSdf(text, file.name));
+    onInput(text, file.name);
   }
 
   function loadSample(id: string) {
@@ -116,6 +115,7 @@ export function MoleculeInput({
         onClick={() => {
           onSmilesChange("");
           onSampleChange("");
+          onInput("", "typed input");
         }}
       >
         <RotateCcw className="size-4" aria-hidden="true" />
