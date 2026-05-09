@@ -1,4 +1,4 @@
-const CACHE_NAME = "cheminformatics-workbench-v0.1.0";
+const CACHE_NAME = "cheminformatics-workbench-v0.2.0";
 const APP_SHELL = [
   "/cheminformatics-workbench/",
   "/cheminformatics-workbench/index.html",

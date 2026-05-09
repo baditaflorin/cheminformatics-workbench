@@ -1,7 +1,7 @@
 {
   "name": "cheminformatics-workbench",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Browser-first molecular workbench for descriptors, bioactivity prediction, docking, and 3D visualization.",
   "type": "module",
   "scripts": {

@@ -12,7 +12,7 @@ Support: https://www.paypal.com/paypalme/florinbadita
 
 Live site: https://baditaflorin.github.io/cheminformatics-workbench/
 
-Version: `0.1.0`
+Version: `0.2.0`
 
 ## Demo
 
@@ -28,7 +28,7 @@ make test
 make build
 ```
 
-## What Works In v0.1.0
+## What Works In v0.2.0
 
 - SMILES text input and SDF/MOL upload.
 - Browser-side descriptor calculation with RDKit.js available for molblock conversion.
