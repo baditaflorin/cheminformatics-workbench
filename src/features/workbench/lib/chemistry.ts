@@ -175,14 +175,101 @@ function formulaFromCounts(counts: Record<string, number>) {
     .join("");
 }
 
+// inferSmilesFromMolBlock used to return a hardcoded SMILES if the text
+// contained "aspirin" or "caffeine", and "C" (methane) for everything else —
+// so any uploaded molfile that didn't happen to name itself was scored as if
+// it were a methane atom. Instead, parse the V2000 atom block and emit a
+// SMILES-shaped concatenation of element symbols (plus bond markers from the
+// bond block). It is not canonical SMILES, but tokenizeAtoms /
+// calculateDescriptors only need atom counts and a handful of bond markers,
+// so the descriptors come out close to what RDKit would report.
 function inferSmilesFromMolBlock(text: string) {
-  if (/aspirin/i.test(text)) {
-    return "CC(=O)Oc1ccccc1C(=O)O";
+  const parsed = parseV2000Counts(text);
+  if (parsed) {
+    return v2000ToPseudoSmiles(parsed);
   }
-  if (/caffeine/i.test(text)) {
-    return "Cn1cnc2n(C)c(=O)n(C)c(=O)c12";
+  // Final fallback: pull anything that looks like an element symbol from the
+  // raw text. This catches V3000 molfiles ("M  V30 1 C 0 0 0 0") and other
+  // formats we don't fully parse, and is still better than always returning
+  // methane.
+  const matched = text.match(/\b(Cl|Br|[CHNOPSFI])\b/g);
+  if (matched && matched.length > 0) {
+    return matched.join("");
   }
   return "C";
+}
+
+interface ParsedV2000 {
+  atoms: string[];
+  bonds: Array<{ from: number; to: number; order: number }>;
+}
+
+// parseV2000Counts pulls the atom and bond blocks out of a V2000 connection
+// table. Column positions follow the MDL spec: counts line is line index 3,
+// atom block starts at index 4. Each atom line has the element symbol in
+// columns 31..33 (1-indexed), and each bond line has atom-indices in
+// columns 1..3 and 4..6, with bond order in 7..9. We are conservative — any
+// shape mismatch returns null so the caller can fall back.
+function parseV2000Counts(text: string): ParsedV2000 | null {
+  const lines = text.split(/\r?\n/);
+  if (lines.length < 5) return null;
+  const countsLine = lines[3];
+  if (!countsLine || !countsLine.includes("V2000")) return null;
+  const atomCount = Number.parseInt(countsLine.slice(0, 3).trim(), 10);
+  const bondCount = Number.parseInt(countsLine.slice(3, 6).trim(), 10);
+  if (!Number.isFinite(atomCount) || atomCount <= 0) return null;
+  if (lines.length < 4 + atomCount) return null;
+
+  const atoms: string[] = [];
+  for (let i = 0; i < atomCount; i += 1) {
+    const line = lines[4 + i] ?? "";
+    // Element symbol lives in columns 31..34 (0-indexed: 30..34).
+    const symbol = line.slice(30, 34).trim();
+    if (!symbol) return null;
+    atoms.push(symbol);
+  }
+
+  const bonds: ParsedV2000["bonds"] = [];
+  const bondStart = 4 + atomCount;
+  const expectedBonds = Number.isFinite(bondCount) ? bondCount : 0;
+  for (let i = 0; i < expectedBonds; i += 1) {
+    const line = lines[bondStart + i];
+    if (!line) break;
+    const from = Number.parseInt(line.slice(0, 3).trim(), 10);
+    const to = Number.parseInt(line.slice(3, 6).trim(), 10);
+    const order = Number.parseInt(line.slice(6, 9).trim(), 10);
+    if (
+      Number.isFinite(from) &&
+      Number.isFinite(to) &&
+      Number.isFinite(order)
+    ) {
+      bonds.push({ from, to, order });
+    }
+  }
+
+  return { atoms, bonds };
+}
+
+function v2000ToPseudoSmiles({ atoms, bonds }: ParsedV2000) {
+  // Concatenate atom symbols, then append one bond marker per double/triple
+  // bond and one branch marker per non-linear bond. The marker types are the
+  // same ones calculateDescriptors looks for via regex, so descriptors that
+  // depend on bond geometry stay in the right ballpark.
+  let doubleBonds = 0;
+  let tripleBonds = 0;
+  for (const bond of bonds) {
+    if (bond.order === 2) doubleBonds += 1;
+    else if (bond.order === 3) tripleBonds += 1;
+  }
+  // Count branches as bonds beyond atomCount - 1 — a spanning tree has
+  // atoms-1 bonds, so any extra bond implies a ring closure or branch.
+  const branches = Math.max(0, bonds.length - Math.max(0, atoms.length - 1));
+
+  const atomStr = atoms.join("");
+  const doubleStr = "=".repeat(doubleBonds);
+  const tripleStr = "#".repeat(tripleBonds);
+  const branchStr = "(".repeat(branches);
+  return `${atomStr}${doubleStr}${tripleStr}${branchStr}`;
 }
 
 function round(value: number, places = 2) {
